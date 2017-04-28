@@ -1,0 +1,3 @@
+rootProject.name = 'Panel'
+
+include ':app'
