@@ -33,7 +33,7 @@ class App extends Component {
           </Text>
         </Panel>
         <Panel
-          header="With onPress, yeaahhhh!!!"
+          header="With onPress, yeaahhhh!!! It's so f#cking amazing wooohoooo..."
           onPress={() => alert("It's awesome, right?")}
         >
           <Text style={styles.myDescription}>

@@ -24,7 +24,6 @@ class Panel extends Component {
     this.setMaxHeight = this.setMaxHeight.bind(this);
     this.setMinHeight = this.setMinHeight.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.renderHeader = this.renderHeader.bind(this);
   }
 
   componentDidMount() {
@@ -93,7 +92,8 @@ class Panel extends Component {
 
     return (
       <Animated.View style={[ 
-        styles.container, style, {
+        styles.container, style,
+        {
           overflow: 'hidden',
           height: animation
         }
@@ -104,7 +104,7 @@ class Panel extends Component {
           onPress={this.toggle}
           onLayout={this.setMinHeight}
         >
-          {this.renderHeader()}
+          { this.renderHeader() }
         </TouchableOpacity>
         { this.state.is_visible &&
           <View onLayout={this.setMaxHeight}>
@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   title: {
+    flex: 1,
     padding: 10,
     color: '#2a2f43',
     fontWeight: 'bold',
