@@ -16,7 +16,8 @@ class Panel extends Component {
     super(props);
 
     this.state = {
-      expanded: true,
+      is_visible: false,
+      expanded: false,
       animation: new Animated.Value(),
     };
 
@@ -24,6 +25,12 @@ class Panel extends Component {
     this.setMinHeight = this.setMinHeight.bind(this);
     this.toggle = this.toggle.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ is_visible: true });
+    }, 10);
   }
 
   toggle() {
@@ -49,6 +56,7 @@ class Panel extends Component {
 
   setMinHeight(event) {
     const minHeight = event.nativeEvent.layout.height
+    this.state.animation.setValue(minHeight);
     this.setState({ minHeight });
   }
 
@@ -91,15 +99,18 @@ class Panel extends Component {
         }
       ]}>
         <TouchableOpacity
+          ref={ref => this._header = ref}
           activeOpacity={1}
           onPress={this.toggle}
           onLayout={this.setMinHeight}
         >
           {this.renderHeader()}
         </TouchableOpacity>
-        <View onLayout={this.setMaxHeight}>
-          {children}
-        </View>
+        { this.state.is_visible &&
+          <View onLayout={this.setMaxHeight}>
+            {children}
+          </View>
+        }
       </Animated.View>
     );
   }
