@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -25,15 +19,54 @@ class App extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainerStyle}>
-        <Panel style={styles.firstHeaderContainer} header={this.renderHeader}>
-          <Text style={styles.myDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainerStyle}
+      >
+        <Panel
+          style={styles.firstHeaderContainer}
+          header={this.renderHeader}
+        >
+          <Text style={styles.myDescription}>
+            Lorem ipsum dolor sit amet, 
+            consectetur adipiscing elit.
+          </Text>
         </Panel>
-        <Panel header="With onPress, yeaahhhh!!!" onPress={() => alert("It's awesome, right?")}>
-          <Text style={styles.myDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+        <Panel
+          header="With onPress, yeaahhhh!!!"
+          onPress={() => alert("It's awesome, right?")}
+        >
+          <Text style={styles.myDescription}>
+            Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit
+            in voluptate velit esse cillum dolore eu
+            fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum.
+          </Text>
         </Panel>
-        <Panel style={styles.thirdHeaderContainer} header="Custom container style">
-          <Text style={styles.myDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</Text>
+        <Panel
+          style={styles.thirdHeaderContainer}
+          header="Custom container style"
+        >
+          <Text style={styles.myDescription}>
+            Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit
+            in voluptate velit esse cillum dolore
+            eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident.
+          </Text>
         </Panel>
         <Panel header="Custom content style">
           <View style={styles.customContent}>
@@ -49,7 +82,7 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   contentContainerStyle: {
-    paddingTop: 50,
+    paddingTop: 30,
     paddingBottom: 20,
   },
   container: {
@@ -68,17 +101,19 @@ const styles = StyleSheet.create({
     height: 50,
   },
   thirdHeaderContainer: {
-    margin: 10,
+    margin: 15,
+    backgroundColor: 'yellow',
   },
   myDescription: {
     padding: 10,
     paddingTop: 0,
   },
   customContent: {
+    backgroundColor: '#bada55',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingVertical: 10,
   },
   square: {
     backgroundColor: 'yellow',

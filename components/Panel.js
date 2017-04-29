@@ -30,7 +30,7 @@ class Panel extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ is_visible: true });
-    }, 10);
+    }, 100);
   }
 
   toggle() {
