@@ -1,4 +1,5 @@
 # react-native-panel
+![demo](https://raw.githubusercontent.com/dwicao/react-native-panel/master/demo.gif)  
 A Customizable React Native Panel
 
 ## Installation  
