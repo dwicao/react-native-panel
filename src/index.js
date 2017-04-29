@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   title: {
+    flex: 1,
     padding: 10,
     color: '#2a2f43',
     fontWeight: 'bold',
