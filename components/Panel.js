@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
@@ -22,10 +23,12 @@ class Panel extends Component {
     this.setMaxHeight = this.setMaxHeight.bind(this);
     this.setMinHeight = this.setMinHeight.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.renderHeader = this.renderHeader.bind(this);
   }
 
   toggle() {
     const { expanded, maxHeight, minHeight, animation } = this.state;
+    const { onPress } = this.props;
 
     const initialValue = expanded ? maxHeight + minHeight : minHeight;
     const finalValue = expanded ? minHeight : maxHeight + minHeight;
@@ -35,6 +38,8 @@ class Panel extends Component {
     animation.setValue(initialValue);
 
     Animated.spring(animation, { toValue: finalValue }).start();
+
+    if (onPress) onPress();
   }
 
   setMaxHeight(event) {
@@ -47,23 +52,52 @@ class Panel extends Component {
     this.setState({ minHeight });
   }
 
-  render(){
-    const { children, title } = this.props;
-    const { expanded, animation } = this.state;
+  renderHeader() {
+    const { header } = this.props;
+    const { expanded } = this.state;
     const icon = expanded ? imgArrowUp : imgArrowDown;
 
+    if (typeof header === 'function') {
+      return header();
+    } else if (typeof header === 'string') {
+      return (
+        <View style={styles.button}>
+          <Text style={styles.title}>{header}</Text>
+          <Image style={styles.buttonImage} source={icon}/>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.button}>
+          <Text style={styles.title}>
+            [Must be String, or Function that {'\n'}
+            render React Element]
+            </Text>
+          <Image style={styles.buttonImage} source={icon}/>
+        </View>
+      );
+    }
+  }
+
+   render() {
+    const { children, style } = this.props;
+    const { expanded, animation } = this.state;
+
     return (
-      <Animated.View style={[ styles.container, { height: animation } ]}>
+      <Animated.View style={[ 
+        styles.container, style, {
+          overflow: 'hidden',
+          height: animation
+        }
+      ]}>
         <TouchableOpacity
-          activeOpacity={0.6}
-          style={styles.button} 
+          activeOpacity={1}
           onPress={this.toggle}
           onLayout={this.setMinHeight}
         >
-          <Text style={styles.title}>{title}</Text>
-          <Image style={styles.buttonImage} source={icon}/>
+          {this.renderHeader()}
         </TouchableOpacity>
-        <View style={styles.body} onLayout={this.setMaxHeight}>
+        <View onLayout={this.setMaxHeight}>
           {children}
         </View>
       </Animated.View>
@@ -71,11 +105,22 @@ class Panel extends Component {
   }
 }
 
+Panel.propTypes = {
+  header: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+  ]),
+  onPress: PropTypes.func,
+  children: PropTypes.element.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    margin: 10,
-    overflow: 'hidden',
   },
   title: {
     padding: 10,
@@ -90,10 +135,6 @@ const styles = StyleSheet.create({
   buttonImage: {
     width: 30,
     height: 25,
-  },
-  body: {
-    padding: 10,
-    paddingTop: 0,
   },
 });
 
