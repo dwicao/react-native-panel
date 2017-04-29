@@ -1,6 +1,7 @@
 # react-native-panel
 ![demo](https://raw.githubusercontent.com/dwicao/react-native-panel/master/demo.gif)  
-A Customizable React Native Panel
+A Customizable React Native Panel for Android and iOS  
+* note: It's lag due to gif recorder app, actually it works more smooth.
 
 ## Installation  
 * `npm install --save react-native-panel`
