@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -24,7 +23,6 @@ class Panel extends Component {
     this.setMaxHeight = this.setMaxHeight.bind(this);
     this.setMinHeight = this.setMinHeight.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.renderHeader = this.renderHeader.bind(this);
   }
 
   componentDidMount() {
@@ -87,7 +85,7 @@ class Panel extends Component {
     }
   }
 
-   render() {
+  render() {
     const { children, style } = this.props;
     const { expanded, animation } = this.state;
 
@@ -116,19 +114,6 @@ class Panel extends Component {
   }
 }
 
-Panel.propTypes = {
-  header: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-  ]),
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.number,
-  ]),
-  onPress: PropTypes.func,
-  children: PropTypes.element.isRequired,
-};
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -148,5 +133,18 @@ const styles = StyleSheet.create({
     height: 25,
   },
 });
+
+Panel.propTypes = {
+  header: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+  ]),
+  onPress: PropTypes.func,
+  children: PropTypes.element.isRequired,
+};
 
 export default Panel;

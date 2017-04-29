@@ -1,23 +1,31 @@
 {
-	"name": "Panel",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"prop-types": "^15.5.8",
-		"react": "16.0.0-alpha.6",
-		"react-native": "0.43.4"
-	},
-	"devDependencies": {
-		"babel-jest": "19.0.0",
-		"babel-preset-react-native": "1.9.1",
-		"jest": "19.0.2",
-		"react-test-renderer": "16.0.0-alpha.6"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "react-native-panel",
+  "version": "1.0.0",
+  "description": "React Native Panel",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwicao/react-native-panel.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "panel",
+    "collabsible",
+    "accordion",
+    "simple"
+  ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "author": "Lutfian Dwi Cahyono <lutfiandwica@gmail.com> (https://dwicao.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwicao/react-native-panel.git/issues"
+  },
+  "homepage": "https://github.com/dwicao/react-native-panel.git#readme"
 }
