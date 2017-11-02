@@ -65,7 +65,12 @@ class Panel extends Component {
     const icon = expanded ? imgArrowUp : imgArrowDown;
 
     if (typeof header === 'function') {
-      return header();
+      return(
+        <View style={styles.button}>
+          <View>{header()}</View>
+          <Image style={styles.buttonImage} source={icon}/>
+        </View>
+      );
     } else if (typeof header === 'string') {
       return (
         <View style={styles.button}>
