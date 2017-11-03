@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/dwicao/react-native-panel.git/issues"
   },
-  "homepage": "https://github.com/dwicao/react-native-panel.git#readme"
+  "homepage": "https://github.com/dwicao/react-native-panel.git#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  }
 }
