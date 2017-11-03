@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import PropTypes from 'prop-types';
+
 import {
   StyleSheet,
   Text,
@@ -59,17 +60,25 @@ class Panel extends Component {
     this.setState({ minHeight });
   }
 
+  renderEmpty(){
+    return (
+       <View>
+         <Text>Choose...</Text>
+       </View>
+    );
+  }
+
   renderHeader() {
     const { header } = this.props;
     const { expanded } = this.state;
     const icon = expanded ? imgArrowUp : imgArrowDown;
 
     if (typeof header === 'function') {
-      return(
-        <View style={styles.button}>
-          <View>{header()}</View>
-          <Image style={styles.buttonImage} source={icon}/>
-        </View>
+      return (
+          <View style={styles.button}>
+            <View>{header()}</View>
+            <Image style={styles.buttonImage} source={icon}/>
+          </View>
       );
     } else if (typeof header === 'string') {
       return (
@@ -91,32 +100,67 @@ class Panel extends Component {
     }
   }
 
+
+  renderHeadless(){
+      const { children, style } = this.props;
+      const { expanded, animation } = this.state;
+      if(!expanded){
+        return this.renderEmpty();
+      }
+
+      return(
+          <Animated.View style={[
+              styles.container, style, {
+                  overflow: 'hidden',
+                  height: animation
+              }
+          ]}>
+            <TouchableOpacity
+                ref={ref => this._header = ref}
+                activeOpacity={1}
+                onPress={this.toggle}
+                onLayout={this.setMinHeight}
+            >
+                {this.renderEmpty()}
+                {/*{this.renderHeader()}*/}
+                {/*{ expanded ? this.renderEmpty() : this.renderHeader() }*/}
+            </TouchableOpacity>
+              { this.state.is_visible &&
+              <View onLayout={this.setMaxHeight}>
+                  {children}
+              </View>
+              }
+          </Animated.View>
+    );
+  }
+
   render() {
     const { children, style } = this.props;
     const { expanded, animation } = this.state;
+    return(
+    <Animated.View
+        style={[
+      styles.container, style, {
+        overflow: 'hidden',
+        height: animation
+      }
+    ]}>
 
-    return (
-      <Animated.View style={[ 
-        styles.container, style, {
-          overflow: 'hidden',
-          height: animation
-        }
-      ]}>
-        <TouchableOpacity
-          ref={ref => this._header = ref}
-          activeOpacity={1}
-          onPress={this.toggle}
-          onLayout={this.setMinHeight}
-        >
+      <TouchableOpacity
+        ref={ref => this._header = ref}
+        activeOpacity={1}
+        onPress={this.toggle}
+        onLayout={this.setMinHeight}
+      >
           {this.renderHeader()}
-        </TouchableOpacity>
-        { this.state.is_visible &&
-          <View onLayout={this.setMaxHeight}>
-            {children}
-          </View>
-        }
-      </Animated.View>
-    );
+          {/*{ expanded ? this.renderEmpty() : this.renderHeader() }*/}
+      </TouchableOpacity>
+      { this.state.is_visible &&
+        <View onLayout={this.setMaxHeight} >
+          <View onPress = {this.toggle}>{children}</View>
+        </View>
+      }
+    </Animated.View>);
   }
 }
 
