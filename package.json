@@ -1,6 +1,6 @@
 {
   "name": "react-native-panel",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React Native Panel",
   "main": "src/index.js",
   "scripts": {
@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/dwicao/react-native-panel.git/issues"
   },
-  "homepage": "https://github.com/dwicao/react-native-panel.git#readme"
+  "homepage": "https://github.com/dwicao/react-native-panel.git#readme",
+  "dependencies": {
+    "prop-types": "^15.6.1"
+  }
 }

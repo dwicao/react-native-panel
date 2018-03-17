@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
@@ -27,40 +28,40 @@ class Panel extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({ is_visible: true });
+      this.setState({is_visible: true});
     }, 100);
   }
 
   toggle() {
-    const { expanded, maxHeight, minHeight, animation } = this.state;
-    const { onPress } = this.props;
+    const {expanded, maxHeight, minHeight, animation} = this.state;
+    const {onPress} = this.props;
 
     const initialValue = expanded ? maxHeight + minHeight : minHeight;
     const finalValue = expanded ? minHeight : maxHeight + minHeight;
 
-    this.setState({ expanded : !expanded });
+    this.setState({expanded: !expanded});
 
     animation.setValue(initialValue);
 
-    Animated.spring(animation, { toValue: finalValue }).start();
+    Animated.spring(animation, {toValue: finalValue}).start();
 
     if (onPress) onPress();
   }
 
   setMaxHeight(event) {
-    const maxHeight = event.nativeEvent.layout.height
-    this.setState({ maxHeight });
+    const maxHeight = event.nativeEvent.layout.height;
+    this.setState({maxHeight});
   }
 
   setMinHeight(event) {
-    const minHeight = event.nativeEvent.layout.height
+    const minHeight = event.nativeEvent.layout.height;
     this.state.animation.setValue(minHeight);
-    this.setState({ minHeight });
+    this.setState({minHeight});
   }
 
   renderHeader() {
-    const { header } = this.props;
-    const { expanded } = this.state;
+    const {header} = this.props;
+    const {expanded} = this.state;
     const icon = expanded ? imgArrowUp : imgArrowDown;
 
     if (typeof header === 'function') {
@@ -69,7 +70,7 @@ class Panel extends Component {
       return (
         <View style={styles.button}>
           <Text style={styles.title}>{header}</Text>
-          <Image style={styles.buttonImage} source={icon}/>
+          <Image style={styles.buttonImage} source={icon} />
         </View>
       );
     } else {
@@ -78,37 +79,37 @@ class Panel extends Component {
           <Text style={styles.title}>
             [Must be String, or Function that {'\n'}
             render React Element]
-            </Text>
-          <Image style={styles.buttonImage} source={icon}/>
+          </Text>
+          <Image style={styles.buttonImage} source={icon} />
         </View>
       );
     }
   }
 
   render() {
-    const { children, style } = this.props;
-    const { expanded, animation } = this.state;
+    const {children, style} = this.props;
+    const {expanded, animation} = this.state;
 
     return (
-      <Animated.View style={[ 
-        styles.container, style, {
-          overflow: 'hidden',
-          height: animation
-        }
-      ]}>
+      <Animated.View
+        style={[
+          styles.container,
+          style,
+          {
+            overflow: 'hidden',
+            height: animation,
+          },
+        ]}>
         <TouchableOpacity
-          ref={ref => this._header = ref}
+          ref={ref => (this._header = ref)}
           activeOpacity={1}
           onPress={this.toggle}
-          onLayout={this.setMinHeight}
-        >
+          onLayout={this.setMinHeight}>
           {this.renderHeader()}
         </TouchableOpacity>
-        { this.state.is_visible &&
-          <View onLayout={this.setMaxHeight}>
-            {children}
-          </View>
-        }
+        {this.state.is_visible && (
+          <View onLayout={this.setMaxHeight}>{children}</View>
+        )}
       </Animated.View>
     );
   }
@@ -136,14 +137,8 @@ const styles = StyleSheet.create({
 });
 
 Panel.propTypes = {
-  header: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-  ]),
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.number,
-  ]),
+  header: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   onPress: PropTypes.func,
   children: PropTypes.element.isRequired,
 };
